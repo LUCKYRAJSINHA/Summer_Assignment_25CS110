@@ -1,0 +1,164 @@
+#include <stdio.h>
+#include <string.h>
+
+
+struct Contact
+{
+    char name[50];
+    char phone[15];
+};
+
+
+struct Contact c[100];
+
+int count=0;
+
+
+
+void addContact()
+{
+    printf("Enter Name: ");
+    scanf("%s",c[count].name);
+
+
+    printf("Enter Phone: ");
+    scanf("%s",c[count].phone);
+
+
+    count++;
+
+    printf("Contact Added Successfully\n");
+}
+
+
+
+void displayContact()
+{
+    int i;
+
+
+    for(i=0;i<count;i++)
+    {
+        printf("\nName: %s",c[i].name);
+        printf("\nPhone: %s\n",c[i].phone);
+    }
+}
+
+
+
+void searchContact()
+{
+    char name[50];
+    int i;
+
+
+    printf("Enter name to search: ");
+    scanf("%s",name);
+
+
+    for(i=0;i<count;i++)
+    {
+        if(strcmp(c[i].name,name)==0)
+        {
+            printf("Contact Found\n");
+            printf("Phone: %s",c[i].phone);
+            return;
+        }
+    }
+
+
+    printf("Contact Not Found");
+}
+
+
+
+void deleteContact()
+{
+    char name[50];
+    int i,j;
+
+
+    printf("Enter name to delete: ");
+    scanf("%s",name);
+
+
+    for(i=0;i<count;i++)
+    {
+        if(strcmp(c[i].name,name)==0)
+        {
+
+            for(j=i;j<count-1;j++)
+            {
+                c[j]=c[j+1];
+            }
+
+            count--;
+
+            printf("Deleted Successfully");
+            return;
+        }
+    }
+
+
+    printf("Contact Not Found");
+}
+
+
+
+int main()
+{
+    int choice;
+
+
+    while(1)
+    {
+
+        printf("\n\n--- Contact Management System ---\n");
+
+        printf("1.Add Contact\n");
+        printf("2.Display Contact\n");
+        printf("3.Search Contact\n");
+        printf("4.Delete Contact\n");
+        printf("5.Exit\n");
+
+
+        printf("Enter choice: ");
+        scanf("%d",&choice);
+
+
+
+        switch(choice)
+        {
+
+        case 1:
+            addContact();
+            break;
+
+
+        case 2:
+            displayContact();
+            break;
+
+
+        case 3:
+            searchContact();
+            break;
+
+
+        case 4:
+            deleteContact();
+            break;
+
+
+        case 5:
+            return 0;
+
+
+        default:
+            printf("Invalid Choice");
+
+        }
+
+    }
+
+}
